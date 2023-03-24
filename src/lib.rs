@@ -7,6 +7,7 @@
 // except according to those terms.
 
 extern crate phf;
+extern crate serde_repr;
 
 #[macro_use]
 extern crate serde_derive;

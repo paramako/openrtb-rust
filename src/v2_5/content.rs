@@ -1,3 +1,5 @@
+use serde_repr::{Deserialize_repr, Serialize_repr};
+
 /// This object describes the content in which the impression will appear, which may be syndicated
 /// or non syndicated content.
 ///
@@ -29,36 +31,37 @@ pub struct Content {
     /// ***
     /// 7 - `Unknown`
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub context: Option<i32>,
+    pub context: Option<ContextType>,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+#[derive(Serialize_repr, Deserialize_repr, PartialEq, Debug, Clone)]
+#[repr(u8)]
 pub enum ContextType {
     /// (i.e., video file or stream such as Internet TV broadcasts)
-    Video,
+    Video = 1,
     /// (i.e., an interactive software game)
-    Game,
+    Game = 2,
     /// (i.e., audio file or stream such as Internet radio broadcasts)
-    Music,
+    Music = 3,
     /// (i.e., an interactive software application)
-    Application,
+    Application = 4,
     /// (i.e., primarily textual document such as a web page, eBook, or news article)
-    Text,
+    Text = 5,
     /// (i.e., none of the other categories applies)
-    Other,
-    Unknown,
+    Other = 6,
+    Unknown = 7,
 }
 
-impl From<ContextType> for i32 {
-    fn from(value: ContextType) -> i32 {
-        match value {
-            ContextType::Video => 1,
-            ContextType::Game => 2,
-            ContextType::Music => 3,
-            ContextType::Application => 4,
-            ContextType::Text => 5,
-            ContextType::Other => 6,
-            ContextType::Unknown => 7,
-        }
-    }
+#[test]
+fn test_content_serde() {
+    let expected = r#"{"id":"1234567","context":2}"#;
+
+    let content = Content {
+        id: Some("1234567".to_string()),
+        context: Some(ContextType::Game),
+    };
+
+    let json = serde_json::to_string(&content).unwrap();
+
+    assert_eq!(expected, json);
 }
