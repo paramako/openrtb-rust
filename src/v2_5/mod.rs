@@ -43,6 +43,7 @@ pub use self::bid::*;
 pub use self::bid_request::*;
 pub use self::bid_response::*;
 pub use self::category::*;
+pub use self::content::*;
 pub use self::data::*;
 pub use self::device::*;
 pub use self::format::*;
