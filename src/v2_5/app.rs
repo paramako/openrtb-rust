@@ -48,8 +48,7 @@ pub struct App {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub publisher: Option<Publisher>,
 
-    /// Details about the `Content`
-    ///
+    /// Details about the `Content` (Section 3.2.16) within the app.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub content: Option<Content>,
 

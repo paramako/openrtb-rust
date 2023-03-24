@@ -29,11 +29,11 @@ pub struct Content {
     /// ***
     /// 7 - `Unknown`
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub context: Option<ContentContextType>,
+    pub context: Option<i32>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
-pub enum ContentContextType {
+pub enum ContextType {
     /// (i.e., video file or stream such as Internet TV broadcasts)
     Video,
     /// (i.e., an interactive software game)
@@ -49,16 +49,16 @@ pub enum ContentContextType {
     Unknown,
 }
 
-impl From<ContentContextType> for i32 {
-    fn from(value: ContentContextType) -> i32 {
+impl From<ContextType> for i32 {
+    fn from(value: ContextType) -> i32 {
         match value {
-            ContentContextType::Video => 1,
-            ContentContextType::Game => 2,
-            ContentContextType::Music => 3,
-            ContentContextType::Application => 4,
-            ContentContextType::Text => 5,
-            ContentContextType::Other => 6,
-            ContentContextType::Unknown => 7,
+            ContextType::Video => 1,
+            ContextType::Game => 2,
+            ContextType::Music => 3,
+            ContextType::Application => 4,
+            ContextType::Text => 5,
+            ContextType::Other => 6,
+            ContextType::Unknown => 7,
         }
     }
 }
