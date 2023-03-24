@@ -15,6 +15,7 @@ mod bid;
 mod bid_request;
 mod bid_response;
 mod category;
+mod content;
 mod data;
 mod device;
 mod format;

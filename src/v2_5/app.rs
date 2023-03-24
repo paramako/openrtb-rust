@@ -7,6 +7,7 @@
 // except according to those terms.
 
 use super::category::Category;
+use super::content::Content;
 use super::publisher::Publisher;
 use serde_utils;
 
@@ -46,6 +47,10 @@ pub struct App {
     // paid:
     #[serde(skip_serializing_if = "Option::is_none")]
     pub publisher: Option<Publisher>,
+
+    /// Details about the `Content` (Section 3.2.16) within the app.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub content: Option<Content>,
 
     // TODO: add properly
     // #[skip_serializing_if = "Option::is_none"]
